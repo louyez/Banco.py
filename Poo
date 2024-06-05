@@ -1,0 +1,47 @@
+class ContaBancaria:
+    def __init__(self):
+        self.saldo = 0
+
+    def deposito(self, valor):
+        self.saldo += valor
+        print(f"Depósito de R${valor:.2f} realizado com sucesso!")
+        self.visualizar_saldo()
+
+    def saque(self, valor):
+        if valor > self.saldo:
+            print("Saldo insuficiente para a operação!")
+        else:
+            self.saldo -= valor
+            print(f"Saque de R${valor:.2f} realizado com sucesso.")
+            self.visualizar_saldo()
+
+    def visualizar_saldo(self):
+        print(f"Saldo atual: R${self.saldo:.2f}")
+
+    def executar(self):
+        while True:
+            try:
+                escolha = int(input(f"Olá, escolha entre as seguintes opções:\n"
+                                    "[1] - Depósito\n"
+                                    "[2] - Saque\n"
+                                    "[3] - Visualizar saldo\n"
+                                    "[4] - Fim do programa\n"))
+                if escolha == 1:
+                    valor = float(input("Digite o valor do depósito: "))
+                    self.deposito(valor)
+                elif escolha == 2:
+                    valor = float(input("Digite o valor do seu saque: "))
+                    self.saque(valor)
+                elif escolha == 3:
+                    self.visualizar_saldo()
+                elif escolha == 4:
+                    print("Fim das Operações...")
+                    break
+                else:
+                    print("Opção inválida. Por favor escolha uma opção válida...")
+            except ValueError:
+                print("Por favor, digite um número válido!")
+
+# Cria uma instância da ContaBancaria e executa o programa
+conta = ContaBancaria()
+conta.executar()
